@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Simultaneous_AI_AO_Project2-log scale.vi</TITLE>
+<META NAME="Author" CONTENT="">
+<META NAME="GENERATOR" CONTENT="G Development Environment">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<A NAME="Simultaneous_AI_AO_Project2_log scale.vi"></A><H2>Simultaneous_AI_AO_Project2-log scale.vi</H2>
+<P>I.    Description:</P>
+<P>This example demonstrates how to continuously acquire and generate data at the same time, synchronized with one another.</P>
+<P></P>
+<P>II.   Instructions for Running:</P>
+<P>1. Select the physical channel to correspond to where your signal is input on the DAQ device.  Also, select the corresponding channel for where your signal is being generated.</P>
+<P>2.  Enter the minimum and maximum voltage ranges.</P>
+<P>Note:  For better accuracy try to match the input range to the expected voltage level of the measured signal.</P>
+<P>3.  Set the sample rate of the acquisition.</P>
+<P>Note:  The rate should be at least twice as fast as the maximum frequency component of the signal being acquired.  </P>
+<P>6.  Select the Rate for the generation</P>
+<P>7.  Select what type of signal to generate and the amplitude.</P>
+<P>Note:  This example requires two DMA channels to run.  If your hardware does not support two DMA channels, you need to set the Data Transfer Mechanism property for the Analog Output Task to use &quot;Interrupts&quot;.  The Data Transfer Mechanism property is located in the DAQmx Channel Property hierarchy at:</P>
+<P></P>
+<P>DAQmx Channel Property Node&gt;&gt;Analog Output&gt;&gt;General Properties&gt;&gt;Advanced&gt;&gt;Data Transfer and Memory&gt;&gt;Data Transfer Mechanism</P>
+<P></P>
+<P>Refer to your device documentation to determine how many DMA channels are supported for your hardware.</P>
+<P></P>
+<P>III.  Block Diagram Steps:</P>
+<P>1.  Create an analog input voltage channel.  Also, create an analog output voltage channel.</P>
+<P>2.  Set the rate for the sample clock. Additionally, define the sample mode to be continuous.  Also, set the sample clock rate for the signal generation.</P>
+<P>2a.  Call the Get Terminal Name with Device Prefix VI.  This will take a Task and a terminal and create a properly formatted device + terminal name to use as the source of the Trigger.</P>
+<P>3.  Define the parameters for a Digital Edge Start Trigger.  Set the Analog output to trigger off the AI Start Trigger.  This is an internal trigger signal.</P>
+<P>4.  Use the Basic Function Generator VI to create the signal to be generated.</P>
+<P>5.  Call the Start VI to arm the two functions.  Make sure the analog output is armed before the analog input.  This will ensure both will start at the same time.</P>
+<P>6.  Read the waveform data in a loop until the user hits the stop button or an error occurs.  The Is Task Done? VI is used to check for errors in the Analog Output Task.</P>
+<P>7.  Call the Clear VI to Clear the Task</P>
+<P>8.  Use the popup dialog box to display an error if any.</P>
+<P></P>
+<P>IV.  I/O Connections Overview:</P>
+<P>Make sure your signal input/output terminals match the Physical Channel I/O controls.</P>
+<HR>
+<H3>Connector Pane</H3>
+<P><IMG SRC="Simultaneous__AI__AO__Project2-log_scalec.png" ALT="Simultaneous_AI_AO_Project2-log scale.vi"></P>
+<HR>
+<H3>Front Panel</H3>
+<P><IMG SRC="Simultaneous__AI__AO__Project2-log_scalep.png" ALT="Simultaneous_AI_AO_Project2-log scale.vi"></P>
+<HR>
+<H3>Block Diagram</H3>
+<P><IMG SRC="Simultaneous__AI__AO__Project2-log_scaled.png" ALT="Simultaneous_AI_AO_Project2-log scale.vi"></P>
+<P><IMG SRC="Simultaneous__AI__AO__Project2-log_scaled1.png" ALT="Simultaneous_AI_AO_Project2-log scale.vi"></P>
+<HR>
+<H3></H3>
+<Table>
+</Table>
+</BODY>
+</HTML>
